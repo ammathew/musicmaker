@@ -17,6 +17,18 @@ function timer() {
     console.log( t );
 }
 
+function startStop() {
+    if (recording == true ) {
+        stopRecording();
+        setTimeout( createMelody( records ), 10000 );
+        recording = false
+    } else {
+        recording = true;
+        records = []
+        startRecording();
+    }
+}
+
 function startRecording() {
     timer();
 };
@@ -25,24 +37,11 @@ function stopRecording() {
 }
 
 function playSound( chakra ) {
-    if ( chakra == "one" &&  recording == true ) {
-        recording = false
-        console.log( records );
-        stopRecording();
-        setTimeout( createMelody( records ), 10000 );
-    } else {
-        if( chakra == "one" ) {
-            recording = true;
-            records = []
-            startRecording();
-        }
-
-        if ( typeof audio != 'undefined' ) {
-            audio.src="";
-        }
-        simHertz( chakra, chakraFreqMap[ chakra ]   );
-        audio.play();
-    } 
+    if ( typeof audio != 'undefined' ) {
+        audio.src="";
+    }
+    simHertz( chakra, chakraFreqMap[ chakra ]   );
+    audio.play();
 };
 
 var chakraFreqMap = {
